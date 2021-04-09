@@ -25,7 +25,7 @@ type CLI struct{
 //NewCLI returns a CLI with an embedded helper and exit handler.
 //The default input pointer is '>>>'
 //The default error color is RED
-func NewInteractiveCLI() *CLI{
+func NewCLI() *CLI{
 	handler := &CLI{}
 	handler.reader = bufio.NewReader(os.Stdin)
 	handler.SetErrorColor(RED)

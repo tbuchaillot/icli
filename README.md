@@ -24,6 +24,7 @@ import (
     "fmt"
     "github.com/tbuchaillot/icli"
 )
+
 func main(){
 	//Creates a new interactive cli
 	cli := icli.NewCLI()
