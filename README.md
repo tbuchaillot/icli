@@ -52,6 +52,6 @@ func TestCmdFn(args ...string) error{
 }
 
 ```
-##Output of the example:
+## Output of the example:
 
 ![](demo.gif)
