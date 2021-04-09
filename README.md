@@ -1,19 +1,19 @@
 # ICLI
 Interactive CLI Builder written in Go
 
-#Usage
+# Usage
    - Create a new CLI.
    - Assign any Command you want.
    - Run the CLI :) .
 
-#Customization
+# Customization
 - `SetWelcomeMessage` allows you to set message shown on the cli start.
 - `SetErrorColor` allows you to set the error message color.
 - The lib have defined 7 colors in the colors file.
 - `AddCmd` or `AddCmds` allows you to add any command that implements `Command` interface. 
 - The library has already a `BasicCommand` struct that implements `Command` interface. 
 
-#Examples
+# Examples
 ```go
 
 import (
