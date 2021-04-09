@@ -7,15 +7,22 @@ import (
 	"strings"
 )
 
+//BasicCommand implements Command interface. It usually good idea to use it as a default command.
 type BasicCommand struct{
+	//Fn is the func to be executed when that command is called
 	Fn   func(...string) error
+	//Name is the command name.
 	Name string
+	//Description is the description of what that command does.
 	Description string
+	//Usage is the description of the usage of that command.
 	Usage	string
 
+	//TODO
 	Options []Options
 }
 
+//TODO Options
 type Options struct{
 	Name string
 	Description	string
@@ -56,12 +63,14 @@ func (cmd *BasicCommand) GetUsage() string{
 }
 
 
+//helpCmd is the built in helper for the commands.
 type helpCmd struct {
 	BasicCommand
 	cmds []Command
 }
 
-func NewHelper() *helpCmd{
+//newHelper returns the built in - basic helper
+func newHelper() *helpCmd{
 	helper := &helpCmd{}
 	helper.Name ="help"
 	helper.Description= "It shows the help of commands"
@@ -71,6 +80,7 @@ func NewHelper() *helpCmd{
 	return helper
 }
 
+//fnHelp is the func used when help command is executed
 func (helper *helpCmd) fnHelp(args ...string) error{
 	if len(args) == 0 {
 		cmdsName := []string{}
@@ -95,14 +105,17 @@ func (helper *helpCmd) fnHelp(args ...string) error{
 	return nil
 }
 
+//updateCmd is the helper function to maintain the list commands updated
 func (helper *helpCmd) updateCmd (cmd Command){
 	helper.cmds = append(helper.cmds,cmd)
 }
 
+//exitCmd is the build-in basic exit command
 type exitCmd struct {
 	BasicCommand
 }
 
+//fnExit is the basic exit function for exit command
 func fnExit(args ...string) error{
 	fmt.Println("\033[34mGoodbye!\033[0m")
 	os.Exit(0)

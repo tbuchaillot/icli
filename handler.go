@@ -31,12 +31,21 @@ func NewInteractiveCLI() *CLI{
 	handler.SetErrorColor(RED)
 	handler.inputPointer = ">>>"
 
-	helper := NewHelper()
+	helper := newHelper()
 	handler.helper = helper
 	handler.AddCmd(helper)
 
 	exitCmd := &exitCmd{BasicCommand{Name: "exit",Fn: fnExit,Description: "Finish the cli execution.",Usage: "exit"}}
 	handler.AddCmd(exitCmd)
+
+	return handler
+}
+
+//NewEmptyCLI returns an empty CLI handler.
+func NewEmptyCLI() *CLI{
+	handler := &CLI{}
+	handler.reader = bufio.NewReader(os.Stdin)
+	handler.inputPointer = ">>>"
 
 	return handler
 }
@@ -65,18 +74,22 @@ func (h *CLI) SetWelcomeMessage(msg string){
 }
 
 //AddCmd adds a command to the cli. The command should implements Command interface.
-//it also adds that command to the helper.
+//it also adds that command to the helper if it's set.
 func (h *CLI) AddCmd(cmd Command){
 	h.commander.add(cmd)
-	h.helper.updateCmd(cmd)
+	if h.helper != nil {
+		h.helper.updateCmd(cmd)
+	}
 }
 
 //AddCmds adds multiple command to the cli. The commands should implement Command interface.
-//it also adds every command to the helper.
+//it also adds every command to the helper if it's set.
 func (h *CLI) AddCmds(cmds ...Command){
 	for _, cmd := range cmds{
 		h.commander.add(cmd)
-		h.helper.updateCmd(cmd)
+		if h.helper != nil {
+			h.helper.updateCmd(cmd)
+		}
 	}
 }
 

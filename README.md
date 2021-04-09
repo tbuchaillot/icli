@@ -2,11 +2,15 @@
 Interactive CLI Builder written in Go
 
 # Usage
-   - Create a new CLI.
+   - Create a new CLI. 
    - Assign any Command you want.
    - Run the CLI :) .
 
-# Customization
+`NewEmptyCLI` returns an Empty CLI without any defaults.
+
+`NewCLI` returns a CLI with default color, helper handler, exit handler and error color.
+ 
+### Customization
 - `SetWelcomeMessage` allows you to set message shown on the cli start.
 - `SetErrorColor` allows you to set the error message color.
 - The lib have defined 7 colors in the colors file.
